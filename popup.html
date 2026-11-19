@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <title>Pols del Temps</title>
+  <!-- Estils externs -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- El llenç de p5.js es mou aquí dins -->
+  <div id="canvas-holder"></div>
+
+  <!-- Els controls (botons, sliders, text) els crea el sketch amb p5.js -->
+  <div id="controls"></div>
+
+  <!-- Missatge que només es veu si falta p5.min.js (el sketch l'amaga en arrencar) -->
+  <p id="missing-p5">
+    Falta el fitxer <b>p5.min.js</b> dins la carpeta de l'extensió.<br>
+    Mira el README.md.
+  </p>
+
+  <!-- Manifest V3 no permet scripts inline ni remots: tot va en fitxers locals -->
+  <script src="p5.min.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>

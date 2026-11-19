@@ -1,0 +1,224 @@
+/* POLS DEL TEMPS — estils del popup */
+
+/* Font pròpia*/
+@font-face {
+  font-family: 'OpenSans';
+  src: url('OpenSans.ttf') format('truetype');
+}
+
+/* Paleta del popup com a variables CSS */
+:root {
+  --bg: #ffffff;
+  --panel: #f4f1ea;
+  --text: #262626;
+  --muted: #6b6b6b;
+  --accent: #8b2e3b;
+  --accent-text: #ffffff;
+  --line: #d9d4c7;
+}
+
+/* Quan s'escull la paleta "Nit", el sketch afegeix la classe .dark al <body> */
+body.dark {
+  --bg: #12182b;
+  --panel: #1c2440;
+  --text: #ebebeb;
+  --muted: #9aa3bf;
+  --accent: #e9c46a;
+  --accent-text: #12182b;
+  --line: #2f3a5f;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Fons de la pàgina fora del popup (només es nota fora de Firefox, per exemple a l'editor de p5).
+   Com que <html> té fons propi, el fons del <body> es queda dins de la mida del popup. */
+html {
+  background: #e9e6df;
+}
+
+body {
+  position: relative;
+  margin: 0 auto; /* centrat a l'editor; al popup real no es nota */
+  width: 360px;/* el popup de Firefox s'adapta a aquesta mida */
+  height: 590px;
+  overflow: hidden;
+  background: var(--bg); /* el sketch hi posa el color de la paleta */
+  color: var(--text);
+  font-family: 'OpenSans', system-ui, sans-serif;
+  font-size: 13px;
+  transition: color 0.3s ease;
+}
+
+/* El llenç és el fons de TOT el popup: ocupa tota la finestra i els controls van a sobre */
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  display: block;
+}
+
+/* Espai de dalt reservat per a la flor */
+#canvas-holder {
+  height: 240px;
+}
+
+#controls {
+  position: relative;
+  z-index: 1;
+  padding: 0 12px 12px;
+}
+
+/* ---- Textos ---- */
+/* Alçada fixa: si s'amaga l'hora, l'espai es manté i no es mou res */
+.info {
+  margin-bottom: 10px;
+  height: 20px;
+  line-height: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Panell de sliders ---- */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+}
+
+/* Títol de cada grup (Flor, Partícules, Pol·len) */
+.panel-title {
+  height: 14px;
+  line-height: 14px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 72px 1fr 34px;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+}
+
+.label {
+  font-size: 12px;
+}
+
+.value {
+  text-align: right;
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+input[type='range'] {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* ---- Boletes de color del pol·len ---- */
+.colors {
+  grid-template-columns: 72px 1fr;
+}
+
+.swatches {
+  display: flex;
+  gap: 10px;
+}
+
+.swatch {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--panel);
+  box-shadow: 0 0 0 1px var(--line);
+  cursor: pointer;
+}
+
+/* La bolleta triada té un anell del color d'accent */
+.swatch.on {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* ---- Caselles ---- */
+.checks {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 2px 8px;
+}
+
+.checks label {
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.checks input {
+  accent-color: var(--accent);
+}
+
+/* ---- Botons ---- */
+.buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.btn {
+  flex: 1;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 6px;
+  color: var(--accent-text);
+  background: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.btn.secondary {
+  color: var(--text);
+  background: transparent;
+  border-color: var(--line);
+}
+
+.btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Accessibilitat: contorn visible quan s'hi arriba amb el teclat */
+.btn:focus-visible,
+.swatch:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---- Missatge d'error si falta p5.min.js ---- */
+#missing-p5 {
+  margin: 0;
+  padding: 24px 16px;
+  text-align: center;
+  color: #8b2e3b;
+  font-size: 13px;
+}
